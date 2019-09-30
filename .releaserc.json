@@ -1,0 +1,28 @@
+{
+  "branch": "master",
+  "verifyConditions": [
+    "@semantic-release/github"
+  ],
+  "prepare": [{
+    "path": "@semantic-release/exec",
+    "cmd": "./scripts/prepare.sh ${nextRelease.version}"
+  }],
+  "publish": [{
+    "path": "@semantic-release/github",
+    "assets": [
+      {"path": "build/*.zip", "label": "cappasity3d.zip - prestashop module bundle"}
+    ]
+  }],
+  "analyzeCommits": {
+    "preset": "angular",
+    "releaseRules": [
+      { "type": "docs", "release": "patch" },
+      { "type": "refactor", "release": "patch" },
+      { "type": "style", "release": "patch" },
+      { "type": "minor", "release": "minor" },
+      { "type": "patch", "release": "patch" },
+      { "type": "major", "release": "major" },
+      { "type": "breaking", "release": "major" }
+    ]
+  }
+}

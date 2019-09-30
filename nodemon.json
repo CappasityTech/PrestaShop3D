@@ -1,0 +1,7 @@
+{
+  "verbose": false,
+  "watch": ["src/"],
+  "ignore": ["src/vendor/**"],
+  "ext": "php",
+  "exec": "./scripts/docker-install.sh"
+}

@@ -1,7 +1,7 @@
 {
   "name": "@cappasity/prestahop",
   "private": true,
-  "repository": "git@github.com:CappasityInc/prestashop-module-gallery.git",
+  "repository": "git@github.com:CappasityTech/PrestaShop3D.git",
   "scripts": {
     "semantic-release": "yarn --frozen-lockfile; semantic-release",
     "nodemon": "nodemon",

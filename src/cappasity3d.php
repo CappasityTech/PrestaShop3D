@@ -358,7 +358,7 @@ class Cappasity3d extends Module
         $alias = $this->accountManager->getAlias();
 
         if ($alias === null || $alias === '') {
-          return true;
+            return true;
         }
 
         $productId = $params['id_product'];

@@ -154,7 +154,7 @@ class AdminCappasity3dController extends ModuleAdminController
         $query = Tools::getValue(self::REQUEST_PARAM_QUERY, '');
 
         try {
-            $filesCollection = $this->fileManager->files($token, $query, $page, 12);
+            $filesCollection = $this->fileManager->files($token, $alias, $query, $page, 12);
         } catch (Exception $e) {
             return $this->module->displayError(
                 $this->module->l('Please renew your account settings')

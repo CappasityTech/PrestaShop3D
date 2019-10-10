@@ -36,12 +36,13 @@ class CappasityManagerFile
      * @param int $onPage
      * @return array
      */
-    public function files($token, $query = '', $page = 1, $onPage = 12)
+    public function files($token, $alias, $query = '', $page = 1, $onPage = 12)
     {
         $data = array(
             'limit' => $onPage,
             'offset' => ($page - 1) * $onPage,
             'order' => 'DESC',
+            'owner' => $alias,
             'sortBy' => 'uploadedAt',
         );
 

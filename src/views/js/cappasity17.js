@@ -176,6 +176,14 @@ $(document).ready(function() {
     }
   }
 
+  function reset() {
+    $iframes = {}
+    $iframesArr = [];
+
+    $iframesModal = {};
+    $iframesModalArr = [];
+  }
+
   function run() {
     var $bigImgContainer = getBigImageContainer();
     var $modalImgContainer = getModalImageContainer();
@@ -210,6 +218,6 @@ $(document).ready(function() {
       .on('click', '.js-modal-thumb', handleModalThumbClick);
   }
 
-  window.cappasity = { run: run };
+  window.cappasity = { run: run, reset: reset };
   run();
 });

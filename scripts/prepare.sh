@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -ex
+shopt -s extglob
 
 BUILD_PATH=$(realpath -s ./build)
 
@@ -40,8 +41,7 @@ replace_to_multiline() {
 }
 
 rename() {
-  GLOBIGNORE="*.php"
-  for file in "${1}"/*
+  for file in "${1}"/!(*.php)
   do
     name=$(basename "${file}")
     new_name="${BUILD}.${name}"
@@ -51,7 +51,6 @@ rename() {
     mv "${file}" "${new_path}"
     replace "${name}" "${new_name}"
   done
-  unset GLOBIGNORE
 }
 
 # create source path

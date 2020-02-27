@@ -448,6 +448,9 @@ class Cappasity3d extends Module
         $this->context->smarty->assign(
             array('playerSettings' => $this->playerManager->getSettings())
         );
+        $this->context->smarty->assign(
+            'aiScriptUrl', $this->playerManager->getAiScriptUrl()
+        );
 
         return $this->context->smarty->fetch($this->local_path . 'views/templates/front/player-settings.tpl');
     }

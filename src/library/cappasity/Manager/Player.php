@@ -206,6 +206,12 @@ class CappasityManagerPlayer extends CappasityManagerAbstractManager
     );
 
     /**
+     * @var string
+     */
+
+    protected $aiScriptUrl = 'https://{API_HOST_PLACEHOLDER}/api/player/cappasity-ai';
+
+    /**
      * @var \Cappasity3d
      */
     protected $module;
@@ -251,6 +257,14 @@ class CappasityManagerPlayer extends CappasityManagerAbstractManager
         }
 
         return $settings;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAiScriptUrl()
+    {
+      return $this->aiScriptUrl;
     }
 
     /**

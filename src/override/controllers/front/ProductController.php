@@ -9,7 +9,7 @@
 class ProductController extends ProductControllerCore
 {
     /**
-     * @TODO legacy block, prestashop could not remove those constans on uninstal
+     * @TODO legacy block, prestashop could not remove those constants on uninstall
      */
     const IMAGE_ID = 1000000000;
     const IMAGE_LEGEND = 'cappasity-preview';
@@ -69,7 +69,6 @@ class ProductController extends ProductControllerCore
      */
     protected function groupByCappasityImage(array $images = array())
     {
-        $counter = 100000000;
         $cappasityImages = array();
 
         foreach ($images as $image) {
@@ -77,7 +76,7 @@ class ProductController extends ProductControllerCore
             $variantId = (string)$image['variant_id'];
 
             if (array_key_exists($cappasityId, $cappasityImages) === false) {
-                $imageId = (string)$counter += 1;
+                $imageId = (string)$this->getMockedImageId($image['id']);
                 $cappasityImages[$cappasityId] = array(
                   'cappasityId' => $cappasityId,
                   'imageId' => $imageId,
@@ -96,13 +95,12 @@ class ProductController extends ProductControllerCore
      */
     protected function groupByVariant(array $images = array())
     {
-        $counter = 100000000;
         $cappasityImages = array();
 
         foreach ($images as $image) {
             $cappasityId = (string)$image['cappasity_id'];
             $variantId = (string)$image['variant_id'];
-            $imageId = (string)$counter += 1;
+            $imageId = (string)$this->getMockedImageId($image['id']);
 
             if (array_key_exists($variantId, $cappasityImages) === false) {
                 $cappasityImages[$variantId] = array();
@@ -204,11 +202,8 @@ class ProductController extends ProductControllerCore
         foreach ($groupedByCappasityImage as $cappasityImage) {
             $imageId = (string)$cappasityImage['imageId'];
             $variantsIds = $cappasityImage['variants'];
-            $cappasityId = (string)$cappasityImage['cappasityId'];
-            $legend = "cappasity:{$cappasityId}";
             // add on top of all pictures
             $images = array($imageId => array(
-                'legend' => $legend,
                 'cover' => '0',
                 'id_image' => $imageId,
                 'position' => $imageId,
@@ -232,7 +227,6 @@ class ProductController extends ProductControllerCore
                 array_unshift($combinationImages[$variantId], array(
                      'id_product_attribute' => $variantId,
                      'id_image' => $imageId,
-                     'legend' => $legend,
                 ));
             }
         }
@@ -299,5 +293,13 @@ class ProductController extends ProductControllerCore
                 array('0')
             )),
         );
+    }
+
+    private function getMockedImageId($originalId)
+    {
+        // todo: move to constant? move to placeholder & use placeholder in js? leave like that?
+        $initialFakeId = 100000000;
+
+        return $initialFakeId + $originalId;
     }
 }

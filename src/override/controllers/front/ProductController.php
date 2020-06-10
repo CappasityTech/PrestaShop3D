@@ -156,13 +156,10 @@ class ProductController extends ProductControllerCore
 
             foreach ($cappasityVariantImages as $cappasityVariantImage) {
                 $imageId = (string)$cappasityVariantImage['imageId'];
-                $cappasityId = (string)$cappasityVariantImage['cappasityId'];
-                $legend = "cappasity:{$cappasityId}";
 
                 array_unshift($combinationImages[$productVariantId], array(
                     'id_product_attribute' => $productVariantId,
                     'id_image' => $imageId,
-                    'legend' => $legend,
                 ));
             }
         }
@@ -271,7 +268,6 @@ class ProductController extends ProductControllerCore
     {
         $imageId = (string)$image['imageId'];
         $cappasityId = (string)$image['cappasityId'];
-        $legend = "cappasity:{$cappasityId}";
 
         return array(
             'bySize' => array(
@@ -284,7 +280,6 @@ class ProductController extends ProductControllerCore
             'small' => $this->getImageStub(),
             'medium' => $this->getImage($cappasityId, 452, 452),
             'large' => $this->getImage($cappasityId, 800, 800),
-            'legend' => $legend,
             'cover' => '0',
             'id_image' => $imageId,
             'position' => $imageId,
@@ -297,7 +292,6 @@ class ProductController extends ProductControllerCore
 
     private function getMockedImageId($originalId)
     {
-        // todo: move to constant? move to placeholder & use placeholder in js? leave like that?
         $initialFakeId = 100000000;
 
         return $initialFakeId + $originalId;

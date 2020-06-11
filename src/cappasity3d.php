@@ -407,10 +407,8 @@ class Cappasity3d extends Module
             $this->context->controller->addJS($this->local_path . 'views/js/cappasity16.js');
         }
 
-        return join('', [
-            $this->getPlayerSettingDiv(),
-            $this->getSyncedImagesDiv()
-        ]);
+        return $this->getPlayerSettingDiv()
+            . $this->getSyncedImagesDiv();
     }
 
     /**

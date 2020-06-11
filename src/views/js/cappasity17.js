@@ -109,6 +109,10 @@ $(document).ready(function() {
     return el.getAttribute('data-image-large-src');
   }
 
+  /**
+   * @param previewSrc Ex.: https://api.cappasity.com/api/files/preview/uname/w800-h800-cpad/dd596de4-ae2b-4d66-a023-242ca7d86b51.jpeg
+   * @returns {*}
+   */
   function parseCappasityId(previewSrc) {
     if (typeof previewSrc !== 'string' || !previewSrc.length) {
       throw new Error('Preview src expected to be a string');

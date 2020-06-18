@@ -90,7 +90,7 @@ class Cappasity3d extends Module
         $result = $this->dbManager->setUp()
             && parent::install()
             && $this->installTab()
-            && $this->registerHook('header')
+            && $this->registerHook('displayHeader')
             && $this->registerHook('actionProductUpdate')
             && $this->registerHook('actionProductAdd')
             && $this->registerHook('displayAdminProductsExtra');
@@ -397,7 +397,7 @@ class Cappasity3d extends Module
     /**
      * @return string
      */
-    public function hookHeader()
+    public function hookDisplayHeader()
     {
         $this->context->controller->addCSS($this->local_path . 'views/css/cappasity.css');
 
@@ -407,7 +407,8 @@ class Cappasity3d extends Module
             $this->context->controller->addJS($this->local_path . 'views/js/cappasity16.js');
         }
 
-        return $this->getPlayerSettingDiv();
+        return $this->getPlayerSettingDiv()
+            . $this->getSyncedImagesDiv();
     }
 
     /**
@@ -438,6 +439,24 @@ class Cappasity3d extends Module
         }
 
         return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getSyncedImagesDiv()
+    {
+        $productId = Tools::getValue('id_product');
+
+        if (!$productId) {
+            return '';
+        }
+
+        $this->context->smarty->assign(
+            array('syncedImages' => $this->dbManager->getCappasity(['productId' => $productId]))
+        );
+
+        return $this->context->smarty->fetch($this->local_path . 'views/templates/front/synced-images.tpl');
     }
 
     /**

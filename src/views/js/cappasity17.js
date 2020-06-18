@@ -42,12 +42,8 @@ $(document).ready(function() {
   var $iframesModal = {};
   var $iframesModalArr = [];
 
-  function thumbId(alt) {
-    return 'thumbCpst:' + alt;
-  }
-
-  function modalId(alt) {
-    return 'modalCpst:' + alt;
+  function modalId(cappasityId) {
+    return 'modalCpst:' + cappasityId;
   }
 
   function getBigImageContainer() {
@@ -67,10 +63,9 @@ $(document).ready(function() {
     return $img.parent();
   }
 
-  function generateIframe(id, alt, settings) {
+  function generateIframe(cappasityId, settings) {
     return $('<iframe />', {
-      id: thumbId(alt),
-      src: playerUrl + '/' + id + '/embedded?' + $.param(settings),
+      src: playerUrl + '/' + cappasityId + '/embedded?' + $.param(settings),
       frameborder: 0,
       allowfullscreen: true,
       height: '100%',
@@ -83,8 +78,8 @@ $(document).ready(function() {
     });
   }
 
-  function generateModalIframe(id, alt, settings) {
-    return $('<div />', { id: modalId(alt) })
+  function generateModalIframe(cappasityId, settings) {
+    return $('<div />', { id: modalId(cappasityId) })
       .css({
         display: 'none',
         position: 'absolute',
@@ -95,7 +90,7 @@ $(document).ready(function() {
         zIndex: 1
       })
       .append($('<iframe />', {
-        src: playerUrl + '/' + id + '/embedded?' + $.param(settings),
+        src: playerUrl + '/' + cappasityId + '/embedded?' + $.param(settings),
         frameborder: 0,
         allowfullscreen: true,
         height: '100%',
@@ -110,46 +105,83 @@ $(document).ready(function() {
 
   }
 
-  function handleThumb(el, settings) {
-    var alt = el.getAttribute('alt');
-    var modelId = alt.replace('cappasity:', '');
+  function getImageSrcAttr(el) {
+    return el.getAttribute('data-image-large-src');
+  }
 
-    if (!$iframes[alt]) {
-      $iframesArr.push($iframes[alt] = generateIframe(modelId, alt, settings));
+  /**
+   * @param previewSrc Ex.: https://api.cappasity.com/api/files/preview/uname/w800-h800-cpad/dd596de4-ae2b-4d66-a023-242ca7d86b51.jpeg
+   * @returns {*}
+   */
+  function parseCappasityId(previewSrc) {
+    if (typeof previewSrc !== 'string' || !previewSrc.length) {
+      throw new Error('Preview src expected to be a string');
     }
 
-    if (!$iframesModal[alt]) {
-      $iframesModalArr.push($iframesModal[alt] = generateModalIframe(modelId, alt, settings));
+    return previewSrc.split('/').pop().split('.').shift();
+  }
+
+  function hasCappasityPreviewSrc(el) {
+    var previewSrc = getImageSrcAttr(el);
+
+    return (previewSrc && previewSrc.indexOf('cappasity') !== -1);
+  }
+
+  function isCappasityThumb(el) {
+    return hasCappasityPreviewSrc(el);
+  }
+
+  function getCappasityId(el) {
+      var previewSrc = getImageSrcAttr(el);
+
+      if (!previewSrc || previewSrc.indexOf('cappasity') === -1) {
+        throw new Error('Element is expected to be Cappasity thumbnail');
+      }
+
+      return parseCappasityId(previewSrc);
+  }
+
+  function handleThumb(el, settings) {
+    var cappasityId = getCappasityId(el);
+
+    if (!$iframes[cappasityId]) {
+      $iframesArr.push($iframes[cappasityId] = generateIframe(cappasityId, settings));
+    }
+
+    if (!$iframesModal[cappasityId]) {
+      $iframesModalArr.push($iframesModal[cappasityId] = generateModalIframe(cappasityId, settings));
     }
   }
 
   function handleThumbClick(ev) {
-    var alt = ev.target.getAttribute('alt');
-    var $iframe = $iframes[alt];
-    var $bigImgContainer = getBigImageContainer();
-
-    if ($iframe) {
-      if (!$bigImgContainer.find($iframe).length) {
-        $bigImgContainer.prepend($iframe);
-      }
-
-      $iframesArr.forEach(function ($el) {
-        if ($el === $iframe) {
-          $el.css({ display: 'block' });
-        } else {
-          $el.css({ display: 'none' });
-        }
-      });
-    } else {
+    if (!isCappasityThumb(ev.target)) {
       $iframesArr.forEach(function ($el) {
         $el.css({ display: 'none' });
       });
+
+      return;
     }
+
+    var targetEmbedId = getCappasityId(ev.target);
+    var $iframe = $iframes[targetEmbedId];
+    var $bigImgContainer = getBigImageContainer();
+
+    if (!$bigImgContainer.find($iframe).length) {
+      $bigImgContainer.prepend($iframe);
+    }
+
+    $iframesArr.forEach(function ($el) {
+      if ($el === $iframe) {
+        $el.css({ display: 'block' });
+      } else {
+        $el.css({ display: 'none' });
+      }
+    });
   }
 
   function handleModalThumbClick(ev) {
-    var alt = ev.target.getAttribute('alt');
-    var $iframe = $iframesModal[alt];
+    var targetEmbedId = getCappasityId(ev.target);
+    var $iframe = $iframesModal[targetEmbedId];
 
     if ($iframe) {
       requestAnimationFrame(function () {
@@ -177,7 +209,7 @@ $(document).ready(function() {
   }
 
   function reset() {
-    $iframes = {}
+    $iframes = {};
     $iframesArr = [];
 
     $iframesModal = {};
@@ -189,7 +221,7 @@ $(document).ready(function() {
     var $modalImgContainer = getModalImageContainer();
 
     var playerSettings = $('#' + settingsId).data('embed');
-    var $cappasityThumbs = $('img.js-thumb[alt^="cappasity:"]');
+    var $cappasityThumbs = $('img.js-thumb[data-image-large-src*="cappasity"]');
 
     if (!playerSettings || !$cappasityThumbs.length) {
       return;
@@ -197,9 +229,10 @@ $(document).ready(function() {
 
     $cappasityThumbs.each(function (_, el) { handleThumb(el, playerSettings )});
 
-    var alt = $('img.js-thumb.selected').eq(0).attr('alt');
+    var targetThumb = $('img.js-thumb.selected')[0];
     $iframesArr.forEach(function ($iframe) {
-      $iframe.css({ display: $iframe === $iframes[alt] ? 'display' : 'none' });
+      var isTargetIframe = isCappasityThumb(targetThumb) && ($iframe === $iframes[getCappasityId(targetThumb)]);
+      $iframe.css({ display: isTargetIframe ? 'block' : 'none' });
       if (!$bigImgContainer.find($iframe).length) {
         $bigImgContainer.prepend($iframe);
       }

@@ -4,7 +4,7 @@
 $(document).ready(function () {
   var settingsId = 'cappasity-player-settings';
   var syncedImagesId = 'cappasity-synced-images';
-  var playerUrl = 'https://api.cappasity3d.com/api/player';
+  var playerUrl = 'https://{API_HOST_PLACEHOLDER}/api/player';
   var previewUrl = 'https://{API_HOST_PLACEHOLDER}/api/files/preview/';
   var previewFilters = 'w80-h80-cpad-bffffff';
   var iconHref = '/modules/cappasity3d/views/img/logo-3d.jpg';

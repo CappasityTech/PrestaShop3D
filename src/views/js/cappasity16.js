@@ -9,6 +9,7 @@ $(document).ready(function () {
   var previewFilters = 'w80-h80-cpad-bffffff';
   var iconHref = '/modules/cappasity3d/views/img/logo-3d.jpg';
   var iconBigHref = '/modules/cappasity3d/views/img/logo-3d-thickbox.jpg';
+  var iconLargeHref = '/modules/cappasity3d/views/img/logo-3d-large.jpg';
   var initialFakeId = 100000000;
   var playerSettings = $('#' + settingsId).data('embed');
   var syncedImages = $('#' + syncedImagesId).data('embed');

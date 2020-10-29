@@ -5,11 +5,8 @@ $(document).ready(function () {
   var settingsId = 'cappasity-player-settings';
   var syncedImagesId = 'cappasity-synced-images';
   var playerUrl = 'https://{API_HOST_PLACEHOLDER}/api/player';
-  var previewUrl = 'https://{API_HOST_PLACEHOLDER}/api/files/preview/';
-  var previewFilters = 'w80-h80-cpad-bffffff';
   var iconHref = '/modules/cappasity3d/views/img/logo-3d.jpg';
   var iconBigHref = '/modules/cappasity3d/views/img/logo-3d-thickbox.jpg';
-  var iconLargeHref = '/modules/cappasity3d/views/img/logo-3d-large.jpg';
   var initialFakeId = 100000000;
   var playerSettings = $('#' + settingsId).data('embed');
   var syncedImages = $('#' + syncedImagesId).data('embed');

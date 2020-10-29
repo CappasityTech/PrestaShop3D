@@ -6,16 +6,16 @@
   <p>You need to have a Cappasity account to create, upload, and synchronize 3D Views. Sign up here – <a target="_blank" href="https://3d.cappasity.com/register">https://3d.cappasity.com/register</a></p>
   <p></p>
   <p>There are two options for shooting 3D images or 3D Views of products:</p>
-  <p>1. Download the 3DShot app by Cappasity to create 3D Views of products using only your smartphone. You can shoot anything from rings to a car! Learn how to shoot products on plain backgrounds in this <a target="_blank" href="https://www.youtube.com/watch?v=ELb8kfB5hKE&t=109s">video tutorial</a>. Upload 3D Views to your Cappasity account and synchronize them with product pages.</p>
+  <p>1. <a target="_blank" href="https://3dshot.io/">Download the 3DShot app</a> by Cappasity to create 3D Views of products using only your smartphone. You can shoot anything from rings to a car! Learn how to shoot products on plain backgrounds in this <a target="_blank" href="https://www.youtube.com/watch?v=ELb8kfB5hKE&t=109s">video tutorial</a>. Upload 3D Views to your Cappasity account and synchronize them with product pages.</p>
   <p></p>
-  <iframe style="width: 100%; height: 400px"
+  <iframe style="width: 544px; height: 306px;"
     src="https://www.youtube.com/embed/_P77A2Xil7Y?rel=0&amp;showinfo=0"
     frameborder="0"
     allowfullscreen></iframe>
   <p></p>
   <p>2. If you have a professional photo studio, record 360° videos or photos of products. Next, use <a target="_blank" href="https://cappasity.com/easy-3d-scan/">the Easy 3D Scan software</a> to create interactive 3D Views out of them. Upload the created 3D Views to your Cappasity account.</p>
   <p></p>
-  <iframe style="width: 100%; height: 400px"
+  <iframe style="width: 544px; height: 306px;"
     src="https://www.youtube.com/embed/deYUmPYn4hw?rel=0&amp;showinfo=0"
     frameborder="0"
     allowfullscreen></iframe>

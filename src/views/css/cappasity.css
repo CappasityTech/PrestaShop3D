@@ -30,3 +30,8 @@
     display: table;
     clear: both;
 }
+
+/* make "new" badge be over iframe */
+.product-flags {
+    z-index: 9999;
+}

@@ -131,6 +131,7 @@ class ProductController extends ProductControllerCore
           : array();
         $productAttributeId = (string)$product['id_product_attribute'];
         $images = $product['images'];
+        $hadImages = count($images) > 0;
         $productVariants = $product['main_variants'];
 
         $groupedByCappasityImage = $this->groupByCappasityImage($cappasityImages);
@@ -177,6 +178,13 @@ class ProductController extends ProductControllerCore
         }
 
         $product['images'] = $images;
+
+        if ($hadImages === false) {
+            // for 1.7.1.x
+            $product['cover'] = $images[0];
+            // for 1.7.7.x
+            $product['default_image'] = $images[0];
+        }
 
         $this->context->smarty->assign(array(
             'combinationImages' => $combinationImages,

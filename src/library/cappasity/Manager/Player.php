@@ -264,7 +264,7 @@ class CappasityManagerPlayer extends CappasityManagerAbstractManager
      */
     public function getAiScriptUrl()
     {
-      return $this->aiScriptUrl;
+        return $this->aiScriptUrl;
     }
 
     /**
@@ -284,8 +284,8 @@ class CappasityManagerPlayer extends CappasityManagerAbstractManager
             if (array_key_exists('validation', $setting) === true) {
                 $validationOptions = $setting['validation'];
                 $validationParams = array_key_exists('params', $validationOptions)
-                  ? $validationOptions['params']
-                  : array();
+                    ? $validationOptions['params']
+                    : array();
 
                 if ($this->{$validationOptions['method']}($value, $validationParams) === false) {
                     throw new CappasityManagerPlayerExceptionsValidation(

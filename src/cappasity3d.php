@@ -244,14 +244,26 @@ class Cappasity3d extends Module
 
         try {
             $token = $this->accountManager->getToken();
-            if ($token !== null) {
-                // verify token still active
-                $this->accountManager->info($token);
-                // start sync process
-                $this->syncManager->run($token, $callback, 100);
-            } else {
+            if ($token === null) {
                 throw new Exception('Attempted to sync without security token present');
             }
+            // verify token still active
+            $this->accountManager->info($token);
+            // start sync process
+            $this->syncManager->run($token, $callback, 100);
+        } catch (CappasityManagerSyncExceptionsChallengeValidation $e) {
+            $this->client->sentry->captureException($e, array(
+                'level' => 'error',
+                'extra' => array(
+                    'code' => 'E_SYNC_CLIENT_INVALID_CHALLENGE',
+                    'callback' => $callback,
+                )
+            ));
+
+            return $this->displayError(
+                '[Error ' . $event_id . '] ' .
+                $this->l('Callback validation failed, please ensure that the admin panel URL does not require HTTP Basic authentication')
+            );
         } catch (Exception $e) {
             $event_id = $this->client->sentry->captureException($e, array(
                 'level' => 'error',

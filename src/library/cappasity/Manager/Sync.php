@@ -13,6 +13,8 @@ class CappasityManagerSync extends CappasityManagerAbstractManager
      */
     const SETTINGS_SUBMIT_KEY = 'submitCappasityAccountSync';
 
+    const EXCHANGE_ERROR_CODE_INVALID_CHALLENGE = 'invalid_challenge';
+
     /**
      * @var CappasityClient
      */
@@ -124,6 +126,7 @@ class CappasityManagerSync extends CappasityManagerAbstractManager
             'category' => 'sync',
             'level' => 'debug',
             'data' => array(
+                'callback' => $callback,
                 'products' => $products,
                 'verifyToken' => $verifyToken,
             ),
@@ -148,7 +151,18 @@ class CappasityManagerSync extends CappasityManagerAbstractManager
             'body' => gzencode(Tools::jsonEncode($data)),
         );
 
-        $this->client->request('POST', 'files/exchange', $options);
+        try {
+            $this->client->request('POST', 'files/exchange', $options);
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
+            $parsed = json_decode($e->getResponse()->getBody(), true);
+            $isInvalidChallengeError = $parsed !== null
+                && isset($parsed['errors'][0]['detail']['code'])
+                && $parsed['errors'][0]['detail']['code'] !== EXCHANGE_ERROR_CODE_INVALID_CHALLENGE;
+
+            throw $isInvalidChallengeError
+                ? new CappasityManagerSyncExceptionsChallengeValidation('Invalid challenge')
+                : $e;
+        }
     }
 
     /**

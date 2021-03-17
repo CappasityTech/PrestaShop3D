@@ -49,3 +49,13 @@ function upgrade_module_X_X_X($module)
 Option | Default | Description
 --- | --- | ---
 `-v` | `1.6.1.18` | Version of PrestaShop from docker hub
+
+## Go to the admin panel
+By, default, you can find admin panel at [http://localhost:8080/dev-admin](http://localhost:8080/dev-admin)
+Go to `Menu > Modules > Modules & Services` to upload the module build.
+
+In case of alternative configuration:
+* Explore `docker-compose.yml` for the environment variables for `presta`
+* If it's {PS_INSTALL_AUTO} value is not 1, then go visit http://{PS_DOMAIN}/{PS_FOLDER_INSTALL} to install prestashop to the server 
+* Go to http://{PS_DOMAIN}/{PS_FOLDER_ADMIN} to the admin panel
+* Go to http://{PS_DOMAIN} for the storefront

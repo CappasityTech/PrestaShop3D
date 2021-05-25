@@ -263,7 +263,7 @@ class Cappasity3d extends Module
             return $this->displayError(
                 '[Error ' . $event_id . '] ' .
                 '[Callback: ' . $callback . '] ' .
-                $this->l('Callback validation failed, please ensure that the admin panel URL does not require HTTP Basic authentication')
+                $this->l('Callback validation failed, please ensure that the admin panel URL does not require HTTP Basic authentication.')
             );
         } catch (Exception $e) {
             $event_id = $this->client->sentry->captureException($e, array(

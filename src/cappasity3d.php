@@ -252,7 +252,7 @@ class Cappasity3d extends Module
             // start sync process
             $this->syncManager->run($token, $callback, 100);
         } catch (CappasityManagerSyncExceptionsChallengeValidation $e) {
-            $this->client->sentry->captureException($e, array(
+            $event_id = $this->client->sentry->captureException($e, array(
                 'level' => 'error',
                 'extra' => array(
                     'code' => 'E_SYNC_CLIENT_INVALID_CHALLENGE',

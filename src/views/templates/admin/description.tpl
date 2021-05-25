@@ -21,6 +21,8 @@
     allowfullscreen></iframe>
   <p></p>
   <p>Read our <a target="_blank" href="https://cappasity.com/equipment/">guidelines on how to shoot perfect 3D product images</a> at your studio. Watch the Easy 3D Scan <a target="_blank" href="https://cappasity.com/3d-product-imaging/">software tutorials</a> and read the instructions. Or find a <a target="_blank" href="https://cappasity.com/photography-finder/">Cappasity’s photography partner</a> who will do all this for you.</p>
+  <h2>Hosting configuration</h2>
+  <p>The admin panel URL should be reachable by HTTP and particularly should not require HTTP Basic authentication.</p>
   <h2>PrestaShop configuration</h2>
   <p>Overrides should be enabled. See "Advanced Parameters -> Performance", "Disable all overrides" option must be set to "No". Read <a target="_blank" href="https://cappasitytech.github.io/PrestaShop3D/prestashop-config.html#overrides-should-be-enabled">the documentation for the PrestaShop module</a> to get more info.</p>
   <h2>Installation</h2>

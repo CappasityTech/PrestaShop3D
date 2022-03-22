@@ -1,0 +1,7 @@
+.idea
+vendor
+build
+node_modules
+*.log
+sandbox
+.DS_Store

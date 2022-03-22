@@ -1,0 +1,25 @@
+{
+  "name": "@cappasity/prestahop",
+  "private": true,
+  "repository": "git@github.com:CappasityTech/PrestaShop3D.git",
+  "scripts": {
+    "semantic-release": "yarn --frozen-lockfile; semantic-release",
+    "nodemon": "nodemon",
+    "dev": "./scripts/development-server.sh",
+    "build": "./scripts/prepare.sh"
+  },
+  "devDependencies": {
+    "@semantic-release/exec": "^5.0.0",
+    "nodemon": "^2.0.6",
+    "semantic-release": "^17.2.3"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"
+    }
+  },
+  "dependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "husky": "^4.3.0"
+  }
+}

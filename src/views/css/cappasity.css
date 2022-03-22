@@ -1,0 +1,37 @@
+/**
+{LICENSE_PLACEHOLDER}
+*/
+
+.fancybox-type-iframe .fancybox-nav {
+    top: 40%;
+    width: 10%;
+    height: 20%;
+}
+
+.pb-left-column #cappasity-embed-id {
+    position: relative;
+}
+
+.pb-left-column #cappasity-embed-id iframe {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.pb-left-column #cappasity-embed-id:before {
+    content: "";
+    float: left;
+    padding-bottom: 100%;
+}
+
+.pb-left-column #cappasity-embed-id:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* make "new" badge be over iframe */
+.product-flags {
+    z-index: 9999;
+}

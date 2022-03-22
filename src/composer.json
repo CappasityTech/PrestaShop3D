@@ -1,0 +1,9 @@
+{
+  "require-dev": {
+    "guzzlehttp/guzzle": "^5",
+    "sentry/sentry": "^1"
+  },
+  "autoload": {
+    "classmap": ["library/cappasity"]
+  }
+}

@@ -1,0 +1,36 @@
+version: '3.6'
+
+services:
+  mysql:
+    hostname: mysql
+    container_name: mysql
+    image: "mysql:${MYSQL_VERSION:-5.7}"
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+
+  presta:
+    hostname: presta.local
+    container_name: presta
+    image: "prestashop/prestashop:${PV:-1.6.1.18}"
+    depends_on:
+      - mysql
+    volumes:
+      - ${PWD}:/var/www/html/dev-src
+    environment:
+      - DB_SERVER=mysql
+      - PS_DOMAIN=localhost:8080
+      - PS_INSTALL_AUTO=1
+      - PS_LANGUAGE=en
+      - PS_COUNTRY=US
+      - PS_FOLDER_ADMIN=dev-admin
+      - PS_FOLDER_INSTALL=dev-install
+      - PS_ERASE_DB=1
+      - ADMIN_MAIL=demo@prestashop.com
+      - ADMIN_PASSWD=prestashop_demo
+    ports:
+      - "8080:80"
+    command: |
+      /bin/bash -c "
+        sleep 5 \
+          && /tmp/docker_run.sh
+      "

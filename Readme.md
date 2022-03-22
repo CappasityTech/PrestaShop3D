@@ -9,7 +9,8 @@ This source code is available for educational purposes only.
 
 # Documentation
 
-[https://cappasitytech.github.io/PrestaShop3D/](https://cappasitytech.github.io/PrestaShop3D/)
+- [Prestashop configuration](prestashop-config.md)
+- [Troubleshooting](troubleshooting.md)
 
 # Development
 

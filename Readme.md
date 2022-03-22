@@ -9,8 +9,8 @@ This source code is available for educational purposes only.
 
 # Documentation
 
-- [Prestashop configuration](prestashop-config.md)
-- [Troubleshooting](troubleshooting.md)
+- [Prestashop configuration](docs/prestashop-config.md)
+- [Troubleshooting](docs/troubleshooting.md)
 
 # Development
 
@@ -47,9 +47,9 @@ function upgrade_module_X_X_X($module)
 ./scripts/development-server.sh -v 1.7.1.2
 ```
 
-Option | Default | Description
---- | --- | ---
-`-v` | `1.6.1.18` | Version of PrestaShop from docker hub
+| Option | Default    | Description                           |
+| ------ | ---------- | ------------------------------------- |
+| `-v`   | `1.6.1.18` | Version of PrestaShop from docker hub |
 
 ## Go to the admin panel
 By, default, you can find admin panel at [http://localhost:8080/dev-admin](http://localhost:8080/dev-admin)
